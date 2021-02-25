@@ -8,17 +8,18 @@ import (
 var (
 	app   *tview.Application // The tview application.
 	pages *tview.Pages       // The application pages.
+
+	ipanelMenu = []string{"h|Help", "i|Info", "m|Menu", "t|Test", "s|Start", "n|New", "c|Copy", "e|Edit", "d|Dellete", "q|Exit"}
 )
 
 func main() {
 	app = tview.NewApplication()
 	pages := tview.NewPages()
-	// helpPage
-	//helpPage := tview.NewFlex()
 
+	// helpPage
 	boxHelp := tview.NewTextView()
 	boxHelp.SetBorder(true)
-	boxHelp.SetText("\n[yellow::u] uiRDP - Copyright 2021 Andrew Voytenko [::]")
+	boxHelp.SetText("Help Page")
 	boxHelp.SetTextAlign(tview.AlignCenter)
 	boxHelp.SetBackgroundColor(tcell.Color(987))
 	helpPage := tview.NewFlex().SetDirection(tview.FlexRow).
@@ -27,22 +28,33 @@ func main() {
 	//pagesMain := New       *tview.Pages
 	boxTop := tview.NewTextView()
 	boxTop.SetBorder(true)
-	boxTop.SetText("\n[yellow::u] uiRDP - Copyright 2021 Andrew Voytenko [::]")
+	boxTop.SetText("\n uiRDP - Copyright 2021 Andrew Voytenko")
 	boxTop.SetTextAlign(tview.AlignCenter)
 	boxTop.SetBackgroundColor(tcell.Color(987))
 
 	boxMidlle := tview.NewBox().SetBorder(true).SetTitle("Midlle")
-	//boxBottom := tview.NewBox().SetBorder(true).SetTitle("Bottom")
 
-	boxBottom := tview.NewTextView()
-	boxBottom.SetBorder(true)
-	boxBottom.SetText("\n uiRDP - Copyright 2021 Andrew Voytenko")
-	boxBottom.SetTextAlign(tview.AlignCenter)
+	//boxBottom
+	// boxBottom := tview.NewTextView()
+	// boxBottom.SetBorder(true)
+	// boxBottom.SetText("\n uiRDP - Copyright 2021 Andrew Voytenko")
+	// boxBottom.SetTextAlign(tview.AlignCenter)
+
+	txtMenu := tview.NewTable().SetEvaluateAllRows(true)
+	txtMenu.SetBorder(false)
+	for i := range ipanelMenu {
+		txtMenu.SetCellSimple(0, i, ipanelMenu[i])
+		txtMenu.GetCell(0, i).SetAlign(tview.AlignCenter)
+	}
+
+	//txtMenu.txAddress = tview.NewTableCell("0.0.0.0:0")
+	//txInfo.SetCell(0, 1, infoUI.txAddress)
 
 	mainPage := tview.NewFlex().SetDirection(tview.FlexRow).
 		AddItem(boxTop, 5, 3, false).
 		AddItem(boxMidlle, 0, 2, true).
-		AddItem(boxBottom, 5, 3, false)
+		//AddItem(boxBottom, 5, 3, false)
+		AddItem(txtMenu, 5, 3, false)
 
 	pages.AddPage("main", mainPage, true, true)
 	pages.AddPage("help", helpPage, true, true)
@@ -52,7 +64,8 @@ func main() {
 		// Global shortcuts
 		switch event.Rune() {
 		case 'p':
-			app.SetFocus(boxBottom)
+			//app.SetFocus(boxBottom)
+			app.SetFocus(txtMenu)
 			return nil
 		case 't':
 			app.SetFocus(boxTop)
@@ -88,46 +101,15 @@ func main() {
 	})
 
 	//app.SetRoot(pages, true)
-	if err := app.SetRoot(pages, true).EnableMouse(true).Run(); err != nil {
+	app.EnableMouse(true)
+
+	err := app.SetRoot(pages, true)
+	pages.SwitchToPage("main")
+	app.Run()
+	if err != nil {
 		panic(err)
 	}
 
 }
 
-// 2020 uirdp
-// загрузить файл конфигурации если его нет то создать
-// отсортировать список
-// очистить кеш
-// получить базовые параметры системы - Время и Дата, Сетевые настройки
-// вывести главный экран приложения
-//
-// ipanelMenu := []string{
-// 	"h|Help", "i|Info", "m|Menu", "t|Test", "s|Start", "n|New", "c|Copy", "e|Edit", "d|Dellete", "q|Exit",
-// }
-
 //[]string{"№", " Group ", " Name ", " IP ", "Port", " Date ", " Comment "},
-
-// button := tview.NewButton("Hit Enter to close").SetSelectedFunc(func() {
-// 	app.Stop()
-// })
-// button := tview.NewButton("OK").SetSelectedFunc(func() {
-// 	app.Stop()
-// })
-// statusBar = &StatusBar{
-// 	Pages:     tview.NewPages(),
-// 	message:   tview.NewTextView().SetDynamicColors(true).SetText("Loading..."),
-// 	container: app,
-// }
-
-// statusBar.AddPage("messagePage", "statusBar.message", true, true)
-// boxBottomTxt := tview.NewTextView().
-// 	SetDynamicColors(true).
-// 	SetText("This is the status bar")
-
-//boxBottom.AddPage(boxBottomTxt)
-
-// flex := tview.NewFlex().
-// 	AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
-// 		AddItem(boxTop, 3, 1, false).
-// 		AddItem(boxMidlle, 0, 2, false).
-// 		AddItem(boxBottom, 5, 3, false), 0, 2, false)
