@@ -1,0 +1,22 @@
+Title = "stringTitle"
+
+[[Servers]]
+  group = "myGroup"
+  name = "myName"
+  ip = "192.168.0.3"
+  data = "21.08.2020"
+  coment = "my template server"
+
+[[Servers]]
+  group = "youGroup"
+  name = "youName"
+  ip = "172.16.0.3"
+  data = "21.08.2020"
+  coment = "you template server"
+
+[[Servers]]
+  group = "themGroup"
+  name = "themName"
+  ip = "10.0.0.3"
+  data = "21.08.2020"
+  coment = "them template server"
