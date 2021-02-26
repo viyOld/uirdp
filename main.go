@@ -16,15 +16,6 @@ func main() {
 	app = tview.NewApplication()
 	pages := tview.NewPages()
 
-	// helpPage
-	boxHelp := tview.NewTextView()
-	boxHelp.SetBorder(true)
-	boxHelp.SetText("Help Page")
-	boxHelp.SetTextAlign(tview.AlignCenter)
-	boxHelp.SetBackgroundColor(tcell.Color(987))
-	helpPage := tview.NewFlex().SetDirection(tview.FlexRow).
-		AddItem(boxHelp, 5, 3, false)
-
 	//pagesMain := New       *tview.Pages
 	boxTop := tview.NewTextView()
 	boxTop.SetBorder(true)
@@ -47,7 +38,7 @@ func main() {
 		AddItem(txtMenu, 1, 3, false)
 
 	pages.AddPage("main", mainPage, true, true)
-	pages.AddPage("help", helpPage, true, true)
+	pages.AddPage("help", getHelpPage(), true, true)
 
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 
