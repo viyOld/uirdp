@@ -34,27 +34,17 @@ func main() {
 
 	boxMidlle := tview.NewBox().SetBorder(true).SetTitle("Midlle")
 
-	//boxBottom
-	// boxBottom := tview.NewTextView()
-	// boxBottom.SetBorder(true)
-	// boxBottom.SetText("\n uiRDP - Copyright 2021 Andrew Voytenko")
-	// boxBottom.SetTextAlign(tview.AlignCenter)
-
 	txtMenu := tview.NewTable().SetEvaluateAllRows(true)
 	txtMenu.SetBorder(false)
 	for i := range ipanelMenu {
 		txtMenu.SetCellSimple(0, i, ipanelMenu[i])
-		txtMenu.GetCell(0, i).SetAlign(tview.AlignCenter)
+		txtMenu.GetCell(0, i).SetAlign(tview.AlignCenter).SetExpansion(5)
 	}
-
-	//txtMenu.txAddress = tview.NewTableCell("0.0.0.0:0")
-	//txInfo.SetCell(0, 1, infoUI.txAddress)
 
 	mainPage := tview.NewFlex().SetDirection(tview.FlexRow).
 		AddItem(boxTop, 5, 3, false).
 		AddItem(boxMidlle, 0, 2, true).
-		//AddItem(boxBottom, 5, 3, false)
-		AddItem(txtMenu, 5, 3, false)
+		AddItem(txtMenu, 1, 3, false)
 
 	pages.AddPage("main", mainPage, true, true)
 	pages.AddPage("help", helpPage, true, true)
@@ -66,36 +56,22 @@ func main() {
 		case 'p':
 			//app.SetFocus(boxBottom)
 			app.SetFocus(txtMenu)
-			return nil
+			//return nil
 		case 't':
 			app.SetFocus(boxTop)
-			return nil
+			//return nil
 		case 'h':
-			//app.SetRoot(helpPage, true).EnableMouse(true).Draw()
 			pages.SwitchToPage("help")
-			//pages.RemovePage("main")
-
-			return nil
+			//return nil
 		case 'q':
-			//app.Stop()
 			name, _ := pages.GetFrontPage()
 			if name == "help" {
 				pages.SwitchToPage("main")
 			} else {
 				app.Stop()
 			}
-			return nil
+			//return nil
 		}
-
-		// // Handle based on current focus. Handlers may modify event
-		// switch {
-		// case projectPane.HasFocus():
-		// 	event = projectPane.handleShortcuts(event)
-		// case taskPane.HasFocus():
-		// 	event = taskPane.handleShortcuts(event)
-		// case taskDetailPane.HasFocus():
-		// 	event = taskDetailPane.handleShortcuts(event)
-		//}
 		return nil
 
 	})
