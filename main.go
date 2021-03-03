@@ -13,6 +13,7 @@ var (
 )
 
 func main() {
+	getConfig()
 	app = tview.NewApplication()
 	pages := tview.NewPages()
 
@@ -66,17 +67,10 @@ func main() {
 		return nil
 
 	})
-
-	//app.SetRoot(pages, true)
-	app.EnableMouse(true)
-
-	err := app.SetRoot(pages, true)
 	pages.SwitchToPage("main")
-	app.Run()
-	if err != nil {
+	if err := app.SetRoot(pages, true).EnableMouse(true).Run(); err != nil {
 		panic(err)
 	}
-
 }
 
 //[]string{"№", " Group ", " Name ", " IP ", "Port", " Date ", " Comment "},
