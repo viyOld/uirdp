@@ -20,7 +20,7 @@ build:
 #    go build -o bin/main main.go
 #
 run:
-	go run main.go helpPage.go
+	go run main.go helpPage.go config.go
 compile:
 # 32-Bit Systems
 # FreeBDS

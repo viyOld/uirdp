@@ -72,3 +72,20 @@ func getConfig() {
 	}
 	// ------------------------------------------------------------- end load config file
 }
+
+func setConfig() {
+	f, err := os.Create("uirdp.toml")
+	if err != nil {
+		// failed to create/open the file
+		log.Fatal(err)
+	}
+	if err := toml.NewEncoder(f).Encode(config); err != nil {
+		// failed to encode
+		log.Fatal(err)
+	}
+	if err := f.Close(); err != nil {
+		// failed to close the file
+		log.Fatal(err)
+
+	}
+}
