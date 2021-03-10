@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
 )
 
@@ -19,24 +18,29 @@ var helpLine = []string{
 }
 
 func getHelpPage() *tview.Flex {
-	// helpPage
-	boxHelp := tview.NewTextView()
-	boxHelp.SetBorder(true)
-	boxHelp.SetText("Help Page")
-	boxHelp.SetTextAlign(tview.AlignCenter)
-	boxHelp.SetBackgroundColor(tcell.Color(987))
 
-	boxBody := tview.NewTable()
-	boxBody.SetBorder(true)
+	headerBoxHelp := tview.NewTextView()
+	headerBoxHelp.SetBorder(true)
+	headerBoxHelp.SetDynamicColors(true)
+	headerBoxHelp.SetText("[#8080ff] Help Page [::]")
+	headerBoxHelp.SetTextAlign(tview.AlignCenter)
+	//headerBoxHelp.SetTextColor(tcell.ColorGreen)
+
+	helpBodyTable := tview.NewTable()
+	helpBodyTable.SetBorder(true)
+	helpBodyTable.SetBorderPadding(2, 2, 3, 3)
 	for i := range ipanelMenu {
-		boxBody.SetCellSimple(i*2, 0, ipanelMenu[i])
-		boxBody.GetCell(i*2, 0).SetAlign(tview.AlignLeft).SetExpansion(7)
-		boxBody.SetCellSimple(i*2+1, 0, helpLine[i])
-		boxBody.GetCell(i*2+1, 0).SetAlign(tview.AlignCenter).SetExpansion(3)
+		helpBodyTable.SetCellSimple(i*3, 0, ipanelMenu[i])
+		helpBodyTable.GetCell(i*2, 0).SetAlign(tview.AlignLeft).SetExpansion(7)
+		helpBodyTable.SetCellSimple(i*3+1, 0, helpLine[i])
+		helpBodyTable.GetCell(i*2+1, 0).SetAlign(tview.AlignLeft).SetExpansion(3)
 	}
-
+	//setFocus := app.SetFocus(helpBodyTable)
 	helpPage := tview.NewFlex().SetDirection(tview.FlexRow).
-		AddItem(boxHelp, 3, 1, false).
-		AddItem(boxBody, 0, 3, false)
+		AddItem(headerBoxHelp, 3, 1, false).
+		AddItem(helpBodyTable, 0, 3, false)
+
+	//helpPage.InputHandler()(event, app.SetFocus(helpBodyTable))
+
 	return helpPage
 }
