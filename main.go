@@ -28,36 +28,28 @@ func main() {
 			if nameItPage == "help" {
 				pages.SwitchToPage("main")
 			}
-
 		}
 
 		switch event.Rune() {
-		//switch event.Key() {
-		case 'p':
-		//case tcell.Key('p'):
-		//app.SetFocus(boxBottom)
-		//app.SetFocus(txtMenu)
-		//return nil
-		case 't':
-		//case tcell.Key('t'):
-		//app.SetFocus(boxTop)
-		//return nil
+
 		case 'h':
-			//case tcell.Key('h'):
 			pages.SwitchToPage("help")
-			//return nil
+		case 'i':
+
+		case 'm':
+
 		case 'q':
-			//case tcell.Key('q'):
 			name, _ := pages.GetFrontPage()
 			if name == "help" {
 				pages.SwitchToPage("main")
+				//pages.Draw(tcell.Screen)
+				//pages.Blur()
+				//app.SetFocus(mainBodyTable)
 			} else {
 				app.Stop()
 			}
-			//return nil
 		}
 		return event
-
 	})
 
 	pages.SwitchToPage("main")

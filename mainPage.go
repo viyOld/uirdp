@@ -8,7 +8,14 @@ import (
 )
 
 var (
-	headTable = []string{"№", " Group ", " Name ", " IP ", "Port", " Date ", " Comment "}
+	headTable = []string{
+		"№  ",
+		"Group               ",
+		"Name                     ",
+		"IP              ",
+		"Port   ",
+		"Date        ",
+		"Comment"}
 )
 
 func getMainPage() *tview.Flex {
@@ -19,13 +26,16 @@ func getMainPage() *tview.Flex {
 	boxTop.SetBackgroundColor(tcell.Color(987))
 
 	//boxMidlle := tview.NewBox().SetBorder(true).SetTitle("Midlle")
-	mainBodyTable := tview.NewTable().SetEvaluateAllRows(true).SetFixed(0, 0)
+	mainBodyTable := tview.NewTable().SetEvaluateAllRows(true).SetFixed(1, 10)
 	mainBodyTable.SetBorder(true).SetBorderPadding(2, 2, 3, 3)
 	mainBodyTable.SetSelectable(true, false)
+	//mainBodyTable.SetColumnWidths([]int{4, 25, 25, 17, 7, 12, 0})
+	//mainBodyTable.SetRect()
 	//mainBodyTable.SetBorderPadding(2, 2, 3, 3)
 	for i := range headTable {
 		mainBodyTable.SetCellSimple(0, i, headTable[i])
-		mainBodyTable.GetCell(0, i).SetAlign(tview.AlignCenter) //.SetExpansion(1)
+		mainBodyTable.GetCell(0, i).SetAlign(tview.AlignLeft).SetSelectable(false).SetTextColor(tcell.ColorOrange) //.SetExpansion(1)
+		//cell := mainBodyTable.GetCell(0, i)
 	}
 	for j := range config.Servers {
 		mainBodyTable.SetCellSimple(j+1, 0, strconv.Itoa(j+1)) //SetMaxWidth(3)

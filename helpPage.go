@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gdamore/tcell"
 	"github.com/rivo/tview"
 )
 
@@ -31,9 +32,9 @@ func getHelpPage() *tview.Flex {
 	helpBodyTable.SetBorderPadding(2, 2, 3, 3)
 	for i := range ipanelMenu {
 		helpBodyTable.SetCellSimple(i*3, 0, ipanelMenu[i])
-		helpBodyTable.GetCell(i*2, 0).SetAlign(tview.AlignLeft).SetExpansion(7)
+		helpBodyTable.GetCell(i*3, 0).SetAlign(tview.AlignLeft).SetTextColor(tcell.ColorGreen)
 		helpBodyTable.SetCellSimple(i*3+1, 0, helpLine[i])
-		helpBodyTable.GetCell(i*2+1, 0).SetAlign(tview.AlignLeft).SetExpansion(3)
+		helpBodyTable.GetCell(i*3+1, 0).SetAlign(tview.AlignLeft).SetExpansion(3)
 	}
 	//setFocus := app.SetFocus(helpBodyTable)
 	helpPage := tview.NewFlex().SetDirection(tview.FlexRow).
