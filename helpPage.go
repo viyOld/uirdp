@@ -36,12 +36,10 @@ func getHelpPage() *tview.Flex {
 		helpBodyTable.SetCellSimple(i*3+1, 0, helpLine[i])
 		helpBodyTable.GetCell(i*3+1, 0).SetAlign(tview.AlignLeft).SetExpansion(3)
 	}
-	//setFocus := app.SetFocus(helpBodyTable)
+
 	helpPage := tview.NewFlex().SetDirection(tview.FlexRow).
 		AddItem(headerBoxHelp, 3, 1, false).
-		AddItem(helpBodyTable, 0, 3, false)
-
-	//helpPage.InputHandler()(event, app.SetFocus(helpBodyTable))
+		AddItem(helpBodyTable, 0, 3, true)
 
 	return helpPage
 }

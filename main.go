@@ -22,7 +22,7 @@ func main() {
 
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		nameItPage, _ := pages.GetFrontPage()
-		// Global shortcuts
+
 		switch event.Key() {
 		case tcell.KeyESC:
 			if nameItPage == "help" {
@@ -31,7 +31,6 @@ func main() {
 		}
 
 		switch event.Rune() {
-
 		case 'h':
 			pages.SwitchToPage("help")
 		case 'i':
@@ -42,9 +41,6 @@ func main() {
 			name, _ := pages.GetFrontPage()
 			if name == "help" {
 				pages.SwitchToPage("main")
-				//pages.Draw(tcell.Screen)
-				//pages.Blur()
-				//app.SetFocus(mainBodyTable)
 			} else {
 				app.Stop()
 			}

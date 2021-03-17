@@ -25,20 +25,17 @@ func getMainPage() *tview.Flex {
 	boxTop.SetTextAlign(tview.AlignCenter)
 	boxTop.SetBackgroundColor(tcell.Color(987))
 
-	//boxMidlle := tview.NewBox().SetBorder(true).SetTitle("Midlle")
 	mainBodyTable := tview.NewTable().SetEvaluateAllRows(true).SetFixed(1, 10)
 	mainBodyTable.SetBorder(true).SetBorderPadding(2, 2, 3, 3)
 	mainBodyTable.SetSelectable(true, false)
-	//mainBodyTable.SetColumnWidths([]int{4, 25, 25, 17, 7, 12, 0})
-	//mainBodyTable.SetRect()
-	//mainBodyTable.SetBorderPadding(2, 2, 3, 3)
+
 	for i := range headTable {
 		mainBodyTable.SetCellSimple(0, i, headTable[i])
 		mainBodyTable.GetCell(0, i).SetAlign(tview.AlignLeft).SetSelectable(false).SetTextColor(tcell.ColorOrange) //.SetExpansion(1)
-		//cell := mainBodyTable.GetCell(0, i)
 	}
+
 	for j := range config.Servers {
-		mainBodyTable.SetCellSimple(j+1, 0, strconv.Itoa(j+1)) //SetMaxWidth(3)
+		mainBodyTable.SetCellSimple(j+1, 0, strconv.Itoa(j+1))
 		mainBodyTable.SetCellSimple(j+1, 1, config.Servers[j].Group)
 		mainBodyTable.SetCellSimple(j+1, 2, config.Servers[j].Name)
 		mainBodyTable.SetCellSimple(j+1, 3, config.Servers[j].IP)
@@ -60,5 +57,4 @@ func getMainPage() *tview.Flex {
 		AddItem(txtMenu, 1, 3, false)
 
 	return mainPage
-
 }
