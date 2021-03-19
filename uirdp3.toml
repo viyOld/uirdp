@@ -12,7 +12,7 @@ Title = "stringTitle"
   group = "youGroup"
   name = "youName"
   ip = "172.16.0.3"
-  port = 3389
+  port = 0
   data = "21.08.2020"
   coment = "you template server"
 

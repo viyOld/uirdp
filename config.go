@@ -38,18 +38,20 @@ func getConfig() {
 				log.Fatal(err)
 			}
 			config.Title = "stringTitle"
-			server.Group = "myGroup"
-			server.Name = "myName"
-			server.IP = "192.168.0.3"
-			server.Data = "21.08.2020"
-			server.Comment = "my template server"
-			config.Servers = append(config.Servers, server)
-			server.Group = "youGroup"
-			server.Name = "youName"
-			server.IP = "172.16.0.3"
-			server.Data = "21.08.2020"
-			server.Comment = "you template server"
-			config.Servers = append(config.Servers, server)
+			// server.Group = "myGroup"
+			// server.Name = "myName"
+			// server.IP = "192.168.0.3"
+			// server.Data = "21.08.2020"
+			// server.Comment = "my template server"
+			// config.Servers = append(config.Servers, server)
+			config.Servers = append(config.Servers, serverRDP{Group: "myGroup", Name: "myName", IP: "192.168.0.3", Port: 3389, Data: "21.08.2020", Comment: "my template server"})
+			config.Servers = append(config.Servers, serverRDP{Group: "youGroup", Name: "youName", IP: "172.16.0.3", Port: 3389, Data: "21.08.2020", Comment: "you template server"})
+			// server.Group = "youGroup"
+			// server.Name = "youName"
+			// server.IP = "172.16.0.3"
+			// server.Data = "21.08.2020"
+			// server.Comment = "you template server"
+			// config.Servers = append(config.Servers, server)
 			server.Group = "themGroup"
 			server.Name = "themName"
 			server.IP = "10.0.0.3"
@@ -70,6 +72,7 @@ func getConfig() {
 			return
 		}
 	}
+
 	// ------------------------------------------------------------- end load config file
 }
 
